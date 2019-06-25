@@ -1,6 +1,15 @@
 <html>
   <head><title>JSONを読み込む例</title></head>
   <body>
+    <ul>
+      <li> start = {{request.args.get("start")}} </li>
+      <li> end = {{request.args.get("end")}} </li>
+      <li> route = {{answer}} </li>
+        <form>
+		<input type=text name=start>
+		<input type=text name=end>
+		<input type=submit>
+	</form>
     路線：
     <ul>
       {% for line in network %}
