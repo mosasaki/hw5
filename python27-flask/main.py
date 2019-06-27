@@ -61,8 +61,8 @@ def norikae():
   end = request.args.get('end')
   graph = train_service.create_graph(network)
   ans_list = train_service.search_shortest_paths_bfs(graph, start, end)
-  answer = []
-  for station in ans_list:
-    answer.append(station.decode('utf-8'))
+  path = train_service.create_line_station_list(ans_list, network)
+  answer = train_service.choose_line(path)
+
   return render_template('norikae.html', network=network, answer = answer)
 

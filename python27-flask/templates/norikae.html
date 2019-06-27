@@ -1,27 +1,32 @@
 <html>
-  <head><title>JSONを読み込む例</title></head>
+  <head><title>乗り換え案内</title></head>
   <body>
     <ul>
       <li> start = {{request.args.get("start")}} </li>
       <li> end = {{request.args.get("end")}} </li>
-      <li> route = {{answer}} </li>
+         
         <form>
 		<input type=text name=start>
 		<input type=text name=end>
 		<input type=submit>
 	</form>
-    路線：
-    <ul>
-      {% for line in network %}
-      <li> {{line.Name}}
-        <ul>
-          {% for station in line["Stations"] %}
-          <li> {{station}} </li>
-          {% endfor %}
-        </ul> 
-      </li>
-      {% endfor %}
-    </ul>
+	
+      <li> route = </li>
+      
+      <ul>
+	{% for station in answer %}
+	<li> {{station.Station}}
+	  <ul>
+            {% for line in station["Line"] %}
+            <li> {{line}} </li>
+            {% endfor %}
+	    {% if station.token == 1 %}
+	    <li> <font color = "orange"> 乗り換え </font></li>
+	    {% endif %}
+          </ul>
+	</li>
+	{% endfor %}
+      </ul>
   </body>
 </html>
   
