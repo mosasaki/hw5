@@ -56,11 +56,17 @@ def pata():
 # /norikae のリクエスト（例えば http://localhost:8080/norikae ）をこの関数で処理する。
 # ここで乗り換え案内をするように編集してください。
 def norikae():
-  answer = 'hello'
+  
   start = request.args.get('start')
   end = request.args.get('end')
+
+  if start == None or end == None:
+    return render_template('norikae.html', answer=[] )
+    
   graph = train_service.create_graph(network)
   ans_list = train_service.search_shortest_paths_bfs(graph, start, end)
+  if ans_list == None:
+    return render_template('norikae.html', answer=[{'Station':'station do not exists'}])
   path = train_service.create_line_station_list(ans_list, network)
   answer = train_service.choose_line(path)
 
